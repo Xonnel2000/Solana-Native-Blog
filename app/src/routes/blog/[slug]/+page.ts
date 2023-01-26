@@ -64,7 +64,7 @@ export async function load({params:{slug} }) {
      
   // console.log(q)
    return { slug, allBlog,getAlluser,rows };
-}
+} 
 
 // export async function load({ params }) {
   

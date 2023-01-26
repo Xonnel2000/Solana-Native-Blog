@@ -9,7 +9,10 @@ import { Buffer } from 'buffer';
 const connection = new web3.Connection(web3.clusterApiUrl('devnet'))
 
 import { browser } from '$app/environment';
+if(browser){
+    window.Buffer = Buffer;
 
+}
 
 
 

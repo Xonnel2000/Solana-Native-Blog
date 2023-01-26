@@ -8,9 +8,12 @@ const MOVIE_REVIEW_PROGRAM_ID = '8MxcBdiiHDKUD8qMSWVNMnbK2eEXSZUnERn5PNbsiCMs'
 import { Buffer } from 'buffer';
 
 const USERPROFILE_REVIEW_PROGRAM_ID = '6G1cAAbXP7A8nuXqC3r8gGrBwPFkcCx8A85kX1kG65Cf'
+import { browser } from '$app/environment';
 
 
-
+if(browser){
+    window.Buffer = Buffer;
+}
 
 const borshAccountSchema = borsh.struct([
 
