@@ -180,7 +180,7 @@ async function handleClickDelete(blog_account) {
 <div class="mt-12  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-8">
 
 
-{#if myBlogs }
+{#if GeTAllBlog.length }
 <!-- <h1 class=" overflow-hidden">Your count {rowsCount}</h1> -->
 {#each paginatedItems || [] as blog}
 
