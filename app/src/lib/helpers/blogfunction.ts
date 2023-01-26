@@ -3,7 +3,10 @@ import * as borsh from '@project-serum/borsh';
 import { get } from 'svelte/store';
 import { walletStore } from '@svelte-on-solana/wallet-adapter-core';
 import BN from "bn.js"
-import { Buffer } from 'buffer';
+ import { Buffer } from 'buffer';
+
+
+ //import * as Buffer from "buffer";
 
 
 import bs58 from 'bs58';
@@ -13,7 +16,10 @@ import alasql from 'alasql';
 const connection = new web3.Connection(web3.clusterApiUrl('devnet'))
 
 import { browser } from '$app/environment';
+ if(browser){
+    window.Buffer = Buffer;
 
+}
 
 
 
