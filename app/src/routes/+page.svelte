@@ -203,7 +203,7 @@ async function handleClickDelete(blog_account) {
             </p>
             <a href="/blog/{blog.blog}" class="block mt-2">
               <p class="text-xl font-semibold text-gray-900">{blog.title}</p>
-              <p class="mt-3 text-base text-gray-500">{blog.text}</p>
+              <p class="mt-3 text-base text-gray-500">{blog.text.substring(0, 200)}...</p>
             </a>
           </div>
           <div class="mt-6 flex items-center">

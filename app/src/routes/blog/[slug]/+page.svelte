@@ -126,16 +126,18 @@ let newSession = data.getAlluser.filter((el) => el.toString().includes(walletAdd
 
             <div class="bg-white">
                 <div>
-                  <h2 class="sr-only">Customer Reviews</h2>
 
                  {#if allComment.length }
+                 <h2 class="font-medium text-gray-900 mt-2 mb-2 text-center">Read Comment </h2>
+                 <hr>
+
 
                   {#each allComment as comment }
 
                     
               
-                  <div class="-my-10">
-                    <div class="flex space-x-4 text-sm text-gray-500">
+                  <div class="-my-2  mt-1 border-2">
+                    <div class="flex space-x-4 justify-items-center mx-2 text-sm text-gray-500">
                       <div class="flex-none py-10">
                         <img src="{comment.image_url}" alt="" class="h-10 w-10 rounded-full bg-gray-100">
                       </div>
