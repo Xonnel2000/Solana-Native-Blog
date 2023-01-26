@@ -1,0 +1,396 @@
+<script lang="ts">
+	import { walletStore } from '@svelte-on-solana/wallet-adapter-core';
+	import RepoModal from "$lib/modal/RepoModal.svelte";
+	import * as yup from "yup";
+	import { Form, Message, isInvalid } from "svelte-yup";
+	import { UserProfileClient } from '$lib/helpers/utils';
+  import { getUserProfileClient } from '$lib/stores';
+
+
+import { Tabs, Tab, TabList, TabPanel } from 'svelte-tabs';
+import { onMount, setContext } from 'svelte';
+
+
+
+
+  onMount(async () => {
+    //UserProfileClient()
+
+  })
+
+    let showModal = false;
+  function showingModal() {
+    showModal = true;
+  }
+
+  let firstname = '';
+  let lastname = '';
+  let image_url = '';
+  let email = '';
+
+
+let firstnamer
+  let myBlogs:any
+  let ffff:any 
+
+  const showAccountBal = async () => {
+myBlogs= await $getUserProfileClient?.GetPost();
+            
+};
+if (myBlogs) {
+  console.log("hhhhhh", myBlogs)
+}
+
+
+
+  let schema = yup.object().shape({
+    firstname: yup.string().required().max(30).label(" Firstname"),
+    lastname: yup.string().required().label("Poster name"),
+    image_url: yup.string().required().label("Description"),
+    email: yup.string().required().label("Image url"),
+    // email: yup.string().required().email().label("Email address"),
+    // age: yup
+    //   .number()
+    //   .required()
+    //   .min(18)
+    //   .label("Age")
+    //   .nullable(true)
+    //   .transform((v, o) => (o === "" ? null : v)),
+    // answer: yup
+    //   .number()
+    //   .required()
+    //   .positive()
+    //   .oneOf([6], "Answer is wrong")
+    //   .label("Answer")
+    //   .nullable(true)
+    //   .transform((v, o) => (o === "" ? null : v)),
+    // gender: yup.string().required().label("Gender"),
+  });
+  
+  let fields = { firstname: firstname, lastname: lastname, image_url: image_url, email: email };
+
+
+
+  let submitted = false;
+  let isValid;
+  async function formSubmit({ event }) {
+    submitted = true;
+    isValid = schema.isValidSync(fields);
+    if (isValid) {
+
+      const formData = new FormData(event.value)
+      console.log("this sis formdata", formData)
+
+      alert("Everything is validated!");
+      for ( let field of formData ) {
+            const [key, value] = field;
+
+            // Validate First name and Last_name
+            if ( key === 'firstname' || key === 'lastname' ) {
+         console.log("this sis formdata", value)
+
+               
+            }
+          }
+         //const fdata = await request;
+    //   await $getUserProfileClient?.CreateUser(
+    //      fields.firstname,
+    //     fields.lastname,
+    //     fields.email,
+    //     fields.image_url,
+    // );
+    alert(fields.firstname,)
+    }
+  }
+  $: invalid = (firstname) => {
+    if (submitted) {
+      return isInvalid(schema, firstname, fields);
+    }
+    return false;
+  };
+
+
+  $:showAccountBal()
+  
+</script>
+
+<h1>
+    {#if $walletStore?.connected}
+    <div>My wallet is connected {$walletStore?.publicKey}</div>
+    {myBlogs}
+    {/if}
+
+</h1>
+
+
+<Tabs>
+    <TabList>
+      <Tab>One</Tab>
+      <Tab>Two</Tab>
+      <Tab>Three</Tab>
+    </TabList>
+   
+    <TabPanel>
+      <h2>Panel One</h2>
+    </TabPanel>
+   
+    <TabPanel>
+      <h2>Panel Two</h2>
+    </TabPanel>
+   
+    <TabPanel>
+      <h2>Panel Three</h2>
+    </TabPanel>
+  </Tabs>
+
+<!-- this is modal div -->
+<div
+  class="bg-black/60 p-8 flex w-auto  justify-center items-start h-screen "
+>
+
+
+{#if myBlogs}
+  
+<Form
+on:submit
+class="form"
+{schema}
+{fields}
+submitHandler={formSubmit}
+{submitted}
+>
+
+
+
+<label class="input-group input-group-vertical mb-5">
+  <div class="form-control">
+    <label class="input-group input-group-vertical">
+      <span>Firstname </span>
+      <input
+        type="text"
+        id="firstname"
+        placeholder="Firstname"
+        class="input input-bordered"
+        class:invalid={invalid("firstname")}
+        bind:value={fields.firstname }
+        name="firstname"
+      />
+    </label>
+    <Message name="firstname" />
+  </div>
+
+
+  <label class="input-group input-group-vertical mb-5">
+    <div class="form-control">
+      <label class="input-group input-group-vertical">
+        <span>LastName</span>
+        <input
+          type="text"
+          id="lastname"
+          placeholder="lastname"
+          class="input input-bordered"
+          class:invalid={invalid("lastname")}
+          bind:value={fields.lastname}
+        name="lastname"
+
+        />
+      </label>
+      <Message name="lastname" />
+    </div>
+
+    <label class="input-group input-group-vertical mb-5">
+        <div class="form-control">
+          <label class="input-group input-group-vertical">
+            <span>Email</span>
+            <input
+              type="text"
+              id="email"
+              placeholder="Email"
+              class="input input-bordered"
+              class:invalid={invalid("email")}
+              bind:value={fields.email}
+        name="email"
+
+            />
+          </label>
+          <Message name="email" />
+        </div>
+
+
+
+  <label
+    for="comment"
+    class="block text-sm font-medium text-gray-700 mt-10 "
+    >Repository URLs *
+  </label>
+  <label for="comment" class="block text-sm font-medium text-gray-700">
+    Your image URLS (e.g.
+    https://github.com/bitcoin/bitcoin)</label
+  >
+
+  <div class="form-control mt-2">
+    <label class="input-group input-group-vertical">
+      <span>Image URLs *</span>
+
+      <textarea
+        rows="4"
+        name="image_url"
+        id="image_url"
+        placeholder="https://github.com/Xonnel2000/Solana_pda_clientside/tree/master"
+        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        class:invalid={invalid("image_url")}
+        bind:value={fields.image_url}
+
+      />
+    </label>
+    <Message name="image_url" />
+  </div>
+
+
+
+  <button
+    type="submit"
+    class="bg-gray-500 text-white uppercase font-medium text-white p-2 rounded-md mt-5"
+  >
+    Submit</button
+  >
+</label>
+
+</Form>
+
+    {:else}
+
+    <Form
+class="form"
+{schema}
+{fields}
+submitHandler={formSubmit}
+{submitted}
+>
+<label class="input-group input-group-vertical mb-5">
+  <div class="form-control">
+    <label class="input-group input-group-vertical">
+      <span>Firstname </span>
+      <input
+        type="text"
+        id="firstname"
+        placeholder="Firstname"
+        class="input input-bordered"
+        class:invalid={invalid("firstname")}
+        bind:value={fields.firstname}
+      />
+    </label>
+    <Message name="firstname" />
+  </div>
+
+  <label class="input-group input-group-vertical mb-5">
+    <div class="form-control">
+      <label class="input-group input-group-vertical">
+        <span>LastName</span>
+        <input
+          type="text"
+          id="lastname"
+          placeholder="lastname"
+          class="input input-bordered"
+          class:invalid={invalid("lastname")}
+          bind:value={fields.lastname}
+        />
+      </label>
+      <Message name="lastname" />
+    </div>
+
+    <label class="input-group input-group-vertical mb-5">
+        <div class="form-control">
+          <label class="input-group input-group-vertical">
+            <span>Email</span>
+            <input
+              type="text"
+              id="email"
+              placeholder="Email"
+              class="input input-bordered"
+              class:invalid={invalid("email")}
+              bind:value={fields.email}
+            />
+          </label>
+          <Message name="email" />
+        </div>
+
+
+
+  <label
+    for="comment"
+    class="block text-sm font-medium text-gray-700 mt-10 "
+    >Repository URLs *
+  </label>
+  <label for="comment" class="block text-sm font-medium text-gray-700">
+    Your image URLS (e.g.
+    https://github.com/bitcoin/bitcoin)</label
+  >
+
+  <div class="form-control mt-2">
+    <label class="input-group input-group-vertical">
+      <span>Image URLs *</span>
+
+      <textarea
+        rows="4"
+        name="image_url"
+        id="image_url"
+        placeholder="https://github.com/Xonnel2000/Solana_pda_clientside/tree/master"
+        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        class:invalid={invalid("image_url")}
+        bind:value={fields.image_url}
+      />
+    </label>
+    <Message name="image_url" />
+  </div>
+
+ 
+
+  <button
+    type="submit"
+    class="bg-gray-500 text-white uppercase font-medium text-white p-2 rounded-md mt-5"
+  >
+    Submit</button
+  >
+</label>
+</Form>
+
+
+    {/if}
+
+
+</div>
+  <style>
+	.status {
+		margin: 0.5em;
+	}
+	button.drop {
+		background-color: rgb(5, 163, 202);
+	}
+
+	button.green {
+		background-color: #4caf50;
+	}
+	button.yellow {
+		background-color: rgb(230, 208, 10);
+	}
+	button.red {
+		background-color: rgb(156, 28, 28);
+	}
+
+	button {
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin-left: auto;
+		margin-top: 0.5em;
+		margin-bottom: 1em;
+		border-radius: 2px;
+		filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+	}
+</style>
+ 

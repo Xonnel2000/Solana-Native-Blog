@@ -1,0 +1,38 @@
+<script lang="ts">
+    /** @type {import('./$types').PageData} */
+    export let data;
+    /** @type {import('./$types').ActionData} */
+    //export let form;
+   // console.log(form)
+
+    import type { ActionData } from './$types';
+	import { enhance } from '$app/forms';
+	export let form: ActionData;
+
+	$: console.log("duururur", form?.success);
+  </script>
+  
+
+ 
+  <form  use:enhance method="POST" action="?/login">
+    {#if form?.error}
+    <ul class="notice-error">
+        {#each form.errors as error}
+            <li>{error.message}</li>
+        {/each}
+    </ul>
+{/if}
+<!-- <p class="error">{form?.status || ""}</p> -->
+  <!-- {#if form?.incorrect}<p class="error">Invalid Password!</p>{/if} -->
+    <label>
+      Email
+      <input name="email" type="email" >
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" >
+
+    </label>
+    <button>Log in</button>
+      <button type="submit" formaction="?/login">Register</button>
+  </form>
