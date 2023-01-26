@@ -136,18 +136,18 @@ async function handleClickDelete(blog_account) {
 
 
 
-  $: $getBlogClient && showAllBlog && showAllBlog();
- const showAllBlog = async () => {
-myBlogs= await $getBlogClient?.fetchPage(
-  page, 
-  pageSizeer,
-      search, 
-      search !== ''
-);
+//   $: $getBlogClient && showAllBlog && showAllBlog();
+//  const showAllBlog = async () => {
+// myBlogs= await $getBlogClient?.fetchPage(
+//   page, 
+//   pageSizeer,
+//       search, 
+//       search !== ''
+// );
 
-//console.log("this is myBlogs", myBlogs )
+// //console.log("this is myBlogs", myBlogs )
             
-};
+// };
 
   let newSession = data.getAlluser.filter((el) => el.toString().includes(walletAdd.toString()))
  console.log("kkk", newSession)
