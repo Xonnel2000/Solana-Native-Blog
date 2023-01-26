@@ -3,6 +3,8 @@ import * as borsh from '@project-serum/borsh';
 import { get } from 'svelte/store';
 import { walletStore } from '@svelte-on-solana/wallet-adapter-core';
 import BN from "bn.js"
+import { Buffer } from 'buffer';
+
 
 import bs58 from 'bs58';
 import alasql from 'alasql';
