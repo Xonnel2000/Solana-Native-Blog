@@ -3,6 +3,8 @@ import * as web3 from '@solana/web3.js'
 import * as borsh from '@project-serum/borsh';
 import { get } from 'svelte/store';
 import { walletStore } from '@svelte-on-solana/wallet-adapter-core';
+import { Buffer } from 'buffer';
+
 
 const connection = new web3.Connection(web3.clusterApiUrl('devnet'))
 
