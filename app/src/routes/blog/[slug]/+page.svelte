@@ -128,6 +128,8 @@ let newSession = data.getAlluser.filter((el) => el.toString().includes(walletAdd
                 <div>
                   <h2 class="sr-only">Customer Reviews</h2>
 
+                 {#if allComment.length }
+
                   {#each allComment as comment }
 
                     
@@ -149,12 +151,10 @@ let newSession = data.getAlluser.filter((el) => el.toString().includes(walletAdd
                       </div>
                     </div>
 
-
-
-
                     <!-- More reviews... -->
                   </div>
                   {/each}
+                  {/if}
 
                 </div>
               </div>
