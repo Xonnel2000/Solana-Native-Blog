@@ -29,23 +29,23 @@ export async function load({params:{slug} }) {
 
 
 /* this function call single post  */
+const getSingleBlog = async ()=>{
   const data = await getAlldata.GetSinglePost(slug)
- let allBlog = data
+ return data
+}
+ 
 
 /* this function call all user  */
+const allNewUser = async ()=>{
  const allUser = await MovieCoordinator?.GetAllUserSession(
-    connection
-    ).then((user) => {
-    // I forgot to return this
-    getAlluser = user.map((x) => x.authority)
-    //console.log(user)
-    rowsCount = user.length;
-    loading = false;
-  });
+    connection)
+    getAlluser = allUser.map((x) => x.authority)
+    return getAlluser
+  };
   
-  //console.log("thsi is user new", getAlluser)
 
 /* this function call all Comment  */
+const allcommentdata = async ()=>{
   const commentdata = await MovieCoordinator?.fetchCommentPage(
     connection, 
     pagecomment, 
@@ -53,17 +53,12 @@ export async function load({params:{slug} }) {
         search, 
         search !== '',
         slug
-    ).then((url) => {
-    // I forgot to return this
-    rows = url;
-    //console.log(url)
-    rowsCount = url.length;
-    loading = false;
-  });
+    )
+
+    return commentdata
+  };
   
-     
-  // console.log(q)
-   return { slug, allBlog,getAlluser,rows };
+  return { slug, allBlog:getSingleBlog(),getAlluser:allNewUser(),rows:allcommentdata() };
 } 
 
 // export async function load({ params }) {

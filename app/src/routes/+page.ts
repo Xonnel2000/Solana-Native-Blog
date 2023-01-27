@@ -33,42 +33,33 @@ const connection = new web3.Connection(web3.clusterApiUrl('devnet'))
 /** @type {import('./$types').PageLoad} */
 export async function load() {
 
-  const data = await MovieCoordinator?.fetchPage(
-  connection, 
-  page, 
-  pageSize,
-      search, 
-      search !== ''
-  ).then((url) => {
-  // I forgot to return this
-  rows = url;
-  //console.log(url)
-  rowsCount = url.length;
-  loading = false;
-});
-//     const {data, error} = await getPosts()
-// const {count, newerror} = await getTotal_repo()
-// const {lastupdate} = await getLastupdate_repo()
-// let ctreatedAt
-// lastupdate?.forEach((newname)=>{
-//  ctreatedAt = newname.created_at
-// })
+const fetchUser = async ()=>{
+
+  const user = await MovieCoordinator?.GetAllUserSession(
+ connection)
+
+ const returnUser =  user.map((x) => x.authority)
+//  console.log("this is jj", jj)
+ 
+ return returnUser
+
+} 
 
 
 
-const allUser = await MovieCoordinator?.GetAllUserSession(
-  connection
-  ).then((user) => {
-  // I forgot to return this
-  getAlluser = user.map((x) => x.authority)
-  //console.log(user)
-  rowsCount = user.length;
-  loading = false;
-});
-
-//console.log("thsi is user new", getAlluser)
 
 
-    return {getAlluser , rows
-    };
+const fetchBlog = async ()=>{
+  const bl = await MovieCoordinator?.fetchPage(
+    connection, 
+    page, 
+    pageSize,
+        search, 
+        search !== ''
+  )
+
+  return bl
+ }
+
+    return {rows:fetchBlog(), getAlluser:fetchUser()};
   }

@@ -96,13 +96,13 @@ export class MovieCoordinator {
     static async fetchCommentPage(connection, page, perPage, search, reload = false, slug) {
         console.log(perPage, search, page);
         //page = 0
-        console.log("this account tt ", this.Commentaccounts.toString());
+       // console.log("this account tt ", this.Commentaccounts.toString());
         if (this.accounts.length === 0 || reload) {
             await this.prefetchCommentAccounts(connection, search);
         }
 
         const paginatedCommentPublicKeys = this.Commentaccounts.slice(page, perPage);
-        console.log("this account ff", paginatedCommentPublicKeys.toString());
+       // console.log("this account ff", paginatedCommentPublicKeys.toString());
         if (paginatedCommentPublicKeys.length === 0) {
             return [];
         }
@@ -189,20 +189,20 @@ export class MovieCoordinator {
     static async fetchPage(connection, page, perPage, search, reload = false) {
         console.log(perPage, search, page);
         //page = 0
-        console.log("this account tt ", this.accounts.toString());
+       // console.log("this account tt ", this.accounts.toString());
         if (this.accounts.length === 0 || reload) {
             await this.prefetchAccounts(connection, search);
         }
 
         const paginatedPublicKeys = this.accounts.slice(page, perPage);
-        console.log("this account ff", paginatedPublicKeys.toString());
+       // console.log("this account ff", paginatedPublicKeys.toString());
         if (paginatedPublicKeys.length === 0) {
             return [];
         }
 
         const accounts = await connection.getMultipleAccountsInfo(paginatedPublicKeys);
         const movies = accounts.reduce((accum, account) => {
-       console.log("jhhhh", account?.data)
+      // console.log("jhhhh", account?.data)
 
             const movie = borshAccountSchema.decode(account?.data);
             if (!movie) {
@@ -214,7 +214,7 @@ export class MovieCoordinator {
         await this.GetAllUser(connection);
         const olduser = this.newuseraccounts
       // console.log("olduser", olduser)
-       console.log("this is nomove",  movies)
+      // console.log("this is nomove",  movies)
 
 
 

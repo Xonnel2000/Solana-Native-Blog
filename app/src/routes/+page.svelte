@@ -31,7 +31,9 @@ import * as web3 from '@solana/web3.js'
 
 	export let data;
   let GeTAllBlog = data.rows
-   console.log(data.getAlluser)
+    console.log("blog", GeTAllBlog)
+   console.log("user", data.getAlluser)
+
 
 	import TimeAgo from 'javascript-time-ago'
 
