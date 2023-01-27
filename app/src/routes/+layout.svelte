@@ -72,9 +72,9 @@ onMount(async () => {
   
   
 	<Header />
-	<h1>Please connect your wallet to access this site</h1>
 	<WalletMultiButton />
 
+	
 
 
 	{#if $walletStore?.connected}
@@ -86,6 +86,8 @@ onMount(async () => {
   <slot></slot>
   </main>
   {:else}
+  <h1>Please connect your wallet to access this site</h1>
+
   Loading...
   {/if}
   

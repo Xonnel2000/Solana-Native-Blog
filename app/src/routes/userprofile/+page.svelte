@@ -238,12 +238,12 @@ on:submit|preventDefault={editForm}
 
         <label
         for="comment"
-        class="block text-sm font-medium text-gray-700 mt-10 "
-        >Repository URLs *
+        class="block text-sm font-medium text-white mt-10 "
+        >Image URLs *
         </label>
-        <label for="comment" class="block text-sm font-medium text-gray-700">
+        <label for="comment" class="block text-sm font-medium text-white">
         Your image URLS (e.g.
-        https://github.com/bitcoin/bitcoin)</label
+        https://encrypted-tbn0.gstatic.com/images?)</label
         >
         <div class="form-control mt-2">
         <label class="input-group input-group-vertical">
@@ -252,7 +252,7 @@ on:submit|preventDefault={editForm}
             rows="4"
             name="image_url"
             id="image_url"
-            placeholder="https://github.com/Xonnel2000/Solana_pda_clientside/tree/master"
+            placeholder="The image url"
             class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             value="{myBlogs.image_url}"
             />
